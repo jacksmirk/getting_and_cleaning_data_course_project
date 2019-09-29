@@ -51,6 +51,6 @@ groupped <- group_by(mt_std_mean_activity, subject, activity)
 average_act_subj <- summarise_at(groupped, vars(-group_cols()), mean)
 
 # Export the data
-write.csv(mt_std_mean_activity, "tidy_data/std_and_mean_with_activity_names.csv")
-write.csv(average_act_subj, "tidy_data/average_groupped_by_subject_and_activity.csv")
+write.table(mt_std_mean_activity, "tidy_data/std_and_mean_with_activity_names.txt", row.names = FALSE)
+write.table(average_act_subj, "tidy_data/average_groupped_by_subject_and_activity.txt", row.names = FALSE)
 
