@@ -9,7 +9,7 @@
 # load dplyr library
 library(dplyr)
 
-# 1. Merges the training and the test sets to create one data set
+# 1. Merge the training and the test sets to create one data set
 x_train <- read.table("UCI HAR Dataset/train/X_train.txt")
 y_train <- read.table("UCI HAR Dataset/train/y_train.txt")
 x_test <- read.table("UCI HAR Dataset/test/X_test.txt")
@@ -24,7 +24,7 @@ names(merge_train)[1:2] <- c("subject","y")
 ### merge test and train
 merge_total <- rbind(merge_test, merge_train)
 
-# 2. Extracts only the measurements on the mean and standard deviation for each measurement
+# 2. Extract only the measurements on the mean and standard deviation for each measurement
 ### features
 features <- read.table("UCI HAR Dataset/features.txt")
 ### features with stg() or mean()
@@ -34,13 +34,13 @@ feat_std_and_mean <- mutate(feat_std_and_mean, V1 = paste("V", V1, sep = ""))
 ### use these variable names as select for merge_total
 merge_total_std_mean <- select(merge_total, c("subject","y",feat_std_and_mean$V1))
 
-# 3. Uses descriptive activity names to name the activities in the data set
+# 3. Use descriptive activity names to name the activities in the data set
 activity_labels <- read.table("UCI HAR Dataset/activity_labels.txt")
 activity_match <- activity_labels[merge_total_std_mean$y,]
 names(activity_match) <- c("y","activity")
 mt_std_mean_activity <- mutate(merge_total_std_mean, y = activity_match$activity)
 
-# 4. Appropriately labels the data set with descriptive variable names
+# 4. Appropriately label the data set with descriptive variable names
 descriptiveNames <- gsub("-", ".", sub("^f", "freq", sub("^t", "time", feat_std_and_mean$V2)))
 colnames(mt_std_mean_activity) <- c("subject", "activity", descriptiveNames)
 
