@@ -25,4 +25,4 @@ We first change the names of the features to be more descriptive and then we app
 First we group by subject and activity columns and then we summarise the data with the mean function.
 
 ## Export
-Finally we export the data of the merged data frame and the average data frame to csv.
+Finally we export the data of the merged data frame and the average data frame to txt.
